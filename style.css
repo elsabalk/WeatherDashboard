@@ -1,0 +1,27 @@
+.weather-dashboard {
+    text-align: center;
+    background-color: black;
+    color: whitesmoke;
+    font-size: x-large;
+    height: 30px;
+    
+}
+
+.weather {
+    padding: 2%;
+    border: 1px solid black;   
+}
+
+.input-group {
+    text-align: center;
+    padding: 2%;
+}
+
+.form-outline {
+
+}
+
+.btn-primary {
+    width: 100%;
+    padding: 2%;
+}
