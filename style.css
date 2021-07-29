@@ -17,11 +17,12 @@
     padding: 2%;
 }
 
-.form-outline {
-
-}
-
 .btn-primary {
     width: 100%;
     padding: 2%;
+}
+
+.forecastBlocks { 
+    border: 1px solid black; 
+
 }

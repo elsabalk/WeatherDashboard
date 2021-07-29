@@ -2,6 +2,39 @@ var searchBtnEl = document.querySelector("#searchBtn");
 var inputTextboxEl = document.querySelector("#form1");
 var cityDataDisplayEl = document.querySelector("#cityData");
 var cityList = document.querySelector("#city-list");
+var currentWeatherResultsEl = document.querySelector("#current-weather");
+var fiveDayForecastResultsEl = document.querySelector("#five_day_forecast");
+
+var firstDayBoxEl = document.querySelector("#first_day_date");
+var firstDayTempEl = document.querySelector("#first_day_temp");
+var firstDayHumidityEl = document.querySelector("#first_day_humidity");
+
+
+
+var ol = document.querySelector("ol");
+
+
+/////////////////////////////////////////////
+var currentDate = moment().format("MMMM Do, YYYY");
+$("#current-weather").text(currentDate);
+
+var currentDate = moment()
+$("#first_day_date").text(currentDate.format('MM-DD-YYYY'));
+
+var secondDayDate = moment().add(1, 'days');
+$("#second_day_date").text(secondDayDate.format('MM-DD-YYYY'));
+
+var currentDate = moment().add(2, 'days');
+$("#third_day_date").text(currentDate.format('MM-DD-YYYY'));
+
+var currentDate = moment().add(3, 'days');
+$("#fourth_day_date").text(currentDate.format('MM-DD-YYYY'));
+
+var currentDate = moment().add(4, 'days');
+$("#fifth_day_date").text(currentDate.format('MM-DD-YYYY'));
+////////////////////////////////////////////////////
+
+
 
 var apiKey = "9e729922e0d89fca17319ba813d9ec9d";
 
@@ -34,8 +67,10 @@ function storeCityValues() {
     localStorage.setItem("cities", JSON.stringify(cityArray));
 }
 
+
 //On page Load
 function init() {
+
 
     // Get stored city list from localStorage
     var storedTodos = JSON.parse(localStorage.getItem("cities"));
@@ -49,6 +84,7 @@ function init() {
     renderCities();
 }
 
+
 // Once search icon is clicked trigger main method actions
 searchBtnEl.addEventListener("click", function(event) {
     event.preventDefault();
@@ -57,21 +93,46 @@ searchBtnEl.addEventListener("click", function(event) {
     var inputFieldText = inputTextboxEl.value.trim();
     console.log(inputFieldText)
 
-    // Return from function early if submitted todoText is blank
+    // Return from function early if submitted city is blank
     if (inputFieldText === "") {
         alert("Please enter a city to search our awesome weather by");
     }
 
-    // Add new todoText to todos array, clear the input
+    // Add new city to city array, clear the input
     cityArray.push(inputFieldText);
     inputTextboxEl.value = "";
 
     console.log(cityArray)
 
-    //Store updated todos in localStorage, re-render the list
+    //Store updated city in localStorage, re-render the list
     storeCityValues();
     renderCities();
+
+      
+    var requestUrl=  'https://api.openweathermap.org/data/2.5/forecast?q=' + inputFieldText + '&appid=9e729922e0d89fca17319ba813d9ec9d';
+
+    fetch(requestUrl)
+    .then(function (response) {
+      return response.json();
+    })
+    
+    .then(function (data) {
+      //for (var i = 0; i < data.length; i++) {
+        var listItem = document.createElement('li');
+        currentWeatherResultsEl.textContent = "City: " +  data.city.name + "\n" + "Temp: " +  data.list[0].main.temp +  "\n" +  "Humidity: " + data.list[0].main.humidity;
+        ol.appendChild(listItem);
+  
+
+        var forecastOneTemp = data.list[0].main.temp;
+        var forecastOneHumidity =  data.list[0].main.humidity
+        var listItem = document.createElement('li');
+        fiveDayForecastResultsEl.textContent = "Temp: " +  forecastOneTemp +  "\n" +  "Humidity: " + forecastOneHumidity;
+        ol.appendChild(listItem);
+        //Having issues with divs disappearing on click, but able to retrieve data from API assign it to elements
+    });
+    
+   
 });
 
 // Calls init to retrieve data and render it to the page on load
-init()
+ init()

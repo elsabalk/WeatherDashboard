@@ -28,22 +28,55 @@
       <div class="row">
       <div class="col-3 input-group">
          <div class="form-outline">
-            <input type="search" id="form1" class="form-control" placeholder="Search" />
+            <input type="search" id="form1" class="form-control" placeholder="Search"/>
             <label id="searchTextBox" class="form-label" for="form1"></label>
-            </div class="col-3 mag-glass">
+            </div class="mag-glass">
             <button id="searchBtn" type="button" class="btn btn-primary">
             <i class="fas fa-search"></i>
             </button>
          </div>
          <div id="current-weather" class="col-9 weather">
-            Current weather here
+            <ol>
+            </ol>
          </div>
-      </div>
-      <div class="row">
-         <label id="cityData" class="col-3 empty">Recent Search</label>
-         <ul id="city-list"></ul>
-         <div class="col-9 forecast">
-            forecast here
+         <div class="row  d-flex flex-row">
+            <div class="col-3 m-5">
+               <h4 id="cityData" class="recent_searches">Recent Searches</h4>
+            </div>
+            <div class="col-9 m-5 forecast">
+               <h4>5 Day Forecast</h4>
+            </div>
+         </div>
+         <div class="row">
+            <div class="col-3 m-5"></div>
+            <ul id="city-list"></ul>
+         </div>
+         <div id="five_day_forecast" class="col-9 m-5 d-flex flex-row forecast">
+            <div class="col forecastBlocks">
+               <p id="first_day_date"></p>
+               <p id="first_day_temp">Temperature: </p>
+               <p id="first_day_humidity">Humidity: </p>
+            </div>
+            <div class="col forecastBlocks">
+               <p id="second_day_date"></p>
+               <p id="second_day_temp">Temperature: </p>
+               <p id="second_day_humidity">Humidity: </p>
+            </div>
+            <div class="col forecastBlocks">
+               <p id="third_day_date"></p>
+               <p id="third_day_temp">Temperature: </p>
+               <p id="third_day_humidity">Humidity: </p>
+            </div>
+            <div class="col forecastBlocks">
+               <p id="fourth_day_date"></p>
+               <p id="fourth_day_temp">Temperature: </p>
+               <p id="fourth_day_humidity">Humidity: </p>
+            </div>
+            <div class="col forecastBlocks">
+               <p id="fifth_day_date"></p>
+               <p id="fifth_day_temp">Temperature: </p>
+               <p id="fifth_day_humidity">Humidity: </p>
+            </div>
          </div>
       </div>
       <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
